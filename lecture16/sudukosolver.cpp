@@ -2,7 +2,6 @@
 #include<cmath>
 using namespace std;
 
-
 bool kyamaiussijplacepenorakhsaktihun(int mat[9][9],int i,int j,int number,int n){
 	// for rows and cols
 	for(int k=0;k<n;k++){
@@ -24,8 +23,6 @@ bool kyamaiussijplacepenorakhsaktihun(int mat[9][9],int i,int j,int number,int n
 
 	}
 	return true;
-
-
 
 }
 
@@ -66,7 +63,7 @@ bool sudokusolver(int mat[9][9],int i,int j,int n){
 			if(kyabakikasolvehogaya==true){
 				return true;
 			}
-			mat[i][j]=0;
+			mat[i][j]=0; //backtracking
 
 
 		}

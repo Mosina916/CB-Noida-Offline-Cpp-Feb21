@@ -12,10 +12,10 @@ int main(){
 
 	cout<<"Array before sorting"<<endl;
 	for(int i=0;i<=n-1;i++){
-		cout<<arr[i]<<" ";
+		cout<<arr[i]<<" "; //1 2 3 4 5
 	}
 	cout<<endl;
-	// Bubblesort
+	// optimize Bubblesort
 	
 
 	for (int i = 0; i <=n-2; i++)
@@ -49,7 +49,7 @@ int main(){
 
 				swap(arr[j],arr[j+1]);
 			}
-
+			
 		}
 		if(flag==0){
 				break;
