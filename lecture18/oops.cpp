@@ -9,6 +9,8 @@ public: //aap  variables ko class k bahar access kar sakte ho directly
 
 	int modelno;
 	int seats;
+	static int co; //only gets initialized once
+	const int tyres; //constant varible
 	// int price;
 	// default constructor -->helps in making of object
 	//whenever object is formed constructor is called
@@ -18,20 +20,28 @@ public: //aap  variables ko class k bahar access kar sakte ho directly
 
 	// agar mai constructor ko override karti hun tou overrise wala constructor 
 	// kaam karta hai
-	car(){
+	car():tyres(4){
+		// tyres=4;
+
 
 		cout<<"inside default constructor"<<endl;
 		name=NULL;
+		co++;
 
 	}
 
 	// parametrized constructor
-	car(char*n,int m,int s,int p){
+	// initilization list
+	car(char*n,int m,int seats,int p):tyres(4){
 		name=new char[strlen(n)+1];
 		strcpy(name,n);
 		modelno=m;
-		seats=s;
+		// this keyword shows jo object bann raha hai
+		this->seats=seats;
 		price=p;
+		// tyres=4;
+		co++;
+
 
 	}
 	// // permitrized constructor
@@ -44,7 +54,25 @@ public: //aap  variables ko class k bahar access kar sakte ho directly
 	// }
 
 
-	void print(){
+	// copy cunstructor override
+
+	car(car &x):tyres(4){//x=A
+		cout<<"inside copy constructor"<<endl;
+		name=new char[strlen(x.name)+1];
+		strcpy(name,x.name);
+		// name=x.name;
+		price=x.price;
+		seats=x.seats;
+		modelno=x.modelno;
+		// tyres=4;
+		co++;
+
+
+	}
+	// copy assignment operator
+ 	//constant funtcion
+
+	void print() const{
 		cout<<name<<endl;
 		cout<<price<<endl;
 		cout<<seats<<endl;
@@ -79,19 +107,39 @@ public: //aap  variables ko class k bahar access kar sakte ho directly
 	}
 
 	// getter
-	int getprice(){
+	int getprice() const{
 		return price;
+	}
+
+
+	// operator overloading
+	void operator=(car x){
+		cout<<"inside copy assignment constructor"<<endl;
+		name=new char[strlen(x.name)+1];
+		strcpy(name,x.name);
+		// name=x.name;
+		price=x.price;
+		seats=x.seats;
+		modelno=x.modelno;
+
+
+	}
+
+	// dustructor // dustructor order opposite to constructor;
+
+	~car(){
+		cout<<"delete car "<<name<<endl;
+		delete[] name;
+		name=NULL;
+		co--;// dustructor order opposite to constructor;
+
 	}
 
 
 
 
-
-
-
-
-
 };
+int car::co=0; //static variables ko initilize 
 int main(){
 	// int a;
 	car A; //user defined datatype; //A object formed of the type car
@@ -108,25 +156,27 @@ int main(){
 
 
 
-	cout<<A.name<<endl;
-	// cout<<A.price<<endl;
-	cout<<A.getprice()<<endl;
-	cout<<A.seats<<endl;
-	cout<<A.modelno<<endl;
-
+	// cout<<A.name<<endl;
+	// // cout<<A.price<<endl;
+	// cout<<A.getprice()<<endl;
+	// cout<<A.seats<<endl;
+	// cout<<A.modelno<<endl;
+	cout<<"data of a is "<<endl;
 	A.print(); //a calls print function
+	cout<<"a k tyres are"<<A.tyres<<endl;
 
 
 	// car B
 
-	// car B; //user defined datatype; //A object formed of the type car
-	//object form memory space use
+	car B; //user defined datatype; //A object formed of the type car
+	// object form memory space use
 	// A.name="BMW"; string ko char array mai nahi daal sakte
 	// strcpy(B.name,"Audi");
-	// B.update("AUdi");
+	B.update("AUdi");
 	// B.price=700;
-	// B.seats=7;
-	// B.modelno=2019;
+	B.setprice(700);
+	B.seats=7;
+	B.modelno=2019;
 	// B.print();
 
 
@@ -135,7 +185,7 @@ int main(){
 	// cout<<B.seats<<endl;
 	// cout<<B.modelno<<endl;
 
-	// car C("duster",2017,8,1000);
+	car C("duster",2017,8,1000);
 	// C.print();
 	// car D("qwerty",2000,5);
 
@@ -149,6 +199,29 @@ int main(){
 	// cout<<D.price<<endl;
 	// cout<<D.seats<<endl;
 	// cout<<D.modelno<<endl;
+
+	cout<<"data of E is "<<endl;
+	// car E=A;  //deatils of A copy in B // deafult constructor-->copy constructor
+	car E(A);
+	E.print();
+	car F=A;
+
+	E.name[0]='M';
+	// cout<<"A data"<<endl;
+	// A.print();
+	// cout<<"E data"<<endl;
+	// E.print();
+	// cout<<"F data"<<endl;
+	// F.print();
+	// copy assignment operator
+	// car G; //deafault constructor
+	// G=A;
+	// cout<<"G data"<<endl;
+	// G.print();
+	cout<<"Total cars"<<car::co<<endl;
+
+
+
 
 
 
