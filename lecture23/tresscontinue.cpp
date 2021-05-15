@@ -37,7 +37,7 @@ void preorder(node*root){
 
 	// recursive case
 	// root->data
-	cout<<root->data<<" ";
+	cout<<root->data<<",";
 
 	// lst
 	preorder(root->left);
@@ -56,7 +56,7 @@ void inorder(node*root){
 	// lst
 	inorder(root->left);
 	// root->data
-	cout<<root->data<<" ";
+	cout<<root->data<<",";
 
 	// rst
 	inorder(root->right);
@@ -267,12 +267,47 @@ node*buildtreelevelwise(){
 
 
 }
+//global
+int pre[]={8,3,1,6,4,7,10,14,13};
+int in[]={1,3,4,6,7,8,10,13,14};
+int i=0;
+node* createtreeinpre(int s,int e){
+
+	// base case
+	if(s>e){
+		return NULL;
+	}
+
+
+	// recursive case
+	int d=pre[i];//8 3
+	i++;
+	node*root=new node(d);
+	int k=-1;
+	for(int j=s;j<=e;j++){
+		if(in[j]==d){
+			k=j; //5 1
+			break;
+
+		}
+	}
+	root->left=createtreeinpre(s,k-1);
+	root->right=createtreeinpre(k+1,e);
+	return root;
+
+
+
+
+}
 
 
 //input-->8 3 1 -1 -1 6 4 -1 -1 7 -1 -1 10 -1 14 13 -1 -1 -1
 int main(){
+
+	int n=sizeof(pre)/sizeof(int); //9
+	node* parent=createtreeinpre(0,n-1);//0 8
 	// node*parent=buildtree();
-	node*parent=buildtreelevelwise();
+	// node*parent=buildtreelevelwise();
 	// cout<<"preorder : ";
 	// preorder(parent);
 	// cout<<endl;
