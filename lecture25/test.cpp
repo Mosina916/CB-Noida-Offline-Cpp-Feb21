@@ -228,8 +228,12 @@ void printll(node*head){
 
 }
 node* Deleteinbst(node*root,int key){
+	// base case
+	if(root==NULL){
+		return NULL;
+	}
 
-	// 
+	// recursive case
 	// case 1 key lst
 	if(root->data>key){
 		root->left=Deleteinbst(root->left,key);
