@@ -43,8 +43,18 @@ public:
 
 	
 	void dfs(T start){
+		int component=1;
 		unordered_map<int,bool> visited;
 		dfshelper(start,visited);
+		for(auto node:h){
+			if(!visited[node.first]){
+				dfshelper(node.first,visited);
+				component++;
+			}
+		}
+
+		cout<<"no of components are "<<component<<endl;
+
 
 	}
 
@@ -54,22 +64,38 @@ public:
 };
 int main(){
 
-	int noe,non;
-	cin>>noe>>non; 
-	Graph<int> g;
+	Graph<int>g;
+	// comp1
+	g.addEdge(0, 1);
+	g.addEdge(0, 4);
+	g.addEdge(2, 1);
+	g.addEdge(2, 4);
+	g.addEdge(3, 4);
+	g.addEdge(3, 2);
+	g.addEdge(3, 5);
 
-	int u,v;
-	for(int i=0;i<noe;i++){
-		cin>>u>>v;
-		g.addEdge(u,v); 
-	}
+	// comp2
+	g.addEdge(11, 12);
+	g.addEdge(13, 12);
+	g.addEdge(14, 12);
+
+	// comp3
+
+	g.addEdge(114, 115);
+	g.addEdge(114, 116);
+	g.addEdge(114, 117);
+
+	// comp4
+	// g.addEdge(500,600);
+	// g.addEdge(400,600);
+
 
 
 
 
 
 	
-	g.print();
+	// g.print();
 	// unordered_map<int,bool> visited;
 	// cout<<"dfs output is "<<endl;
 	// g.dfs(0,visited);
@@ -78,6 +104,9 @@ int main(){
 	g.dfs(0);
 
 return 0;
+
+
+
 
 
 
