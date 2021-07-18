@@ -57,11 +57,11 @@ int bottomup(int n,int m){
 			else{
 				int ans=0;
 				// sum for col
-				for(int k=0;k<n;k++){
+				for(int k=0;k<i;k++){
 					ans+=dp[k][j];
 				}
 				// sum for row
-				for(int k=0;k<m;k++){
+				for(int k=0;k<j;k++){
 					ans+=dp[i][k];
 				}
 				dp[i][j]=ans;
